@@ -1,6 +1,7 @@
 package Servicio;
 
 import Entidad.Cliente;
+import Entidad.Cuotas;
 import Entidad.Poliza;
 import Entidad.Vehiculo;
 import Enum.EnumVehiculos;
@@ -39,6 +40,7 @@ public class ServicioSeguros {
     Scanner leer = new Scanner(System.in);
     Cliente c1;
     Poliza p1;
+    Cuotas cuo1;
     HashSet<Cliente> listaClientes = new HashSet();
     HashSet<Poliza> listaPoliza = new HashSet();
     HashSet<Vehiculo> listaVehiculos = new HashSet();
@@ -55,17 +57,22 @@ public class ServicioSeguros {
         switch (opc) {
             case 1:
                 c1 = altaCliente();
+                listaVehiculos.add(altaVehiculo());
+                c1.setVehiculos(listaVehiculos);
                 listaClientes.add(c1);
-
                 break;
-            default:
-                throw new AssertionError();
+            case 2:
+                System.out.println(c1.toString());
+                break;
+            case 3:
+                System.out.println(c1.toString());
+                break;
+            case 4:
+                System.out.println("");
+                System.out.println("Muchas gracias!");
+                System.out.println("");
         }
-        if (opc == 4) {
-            System.out.println("");
-            System.out.println("Muchas gracias!");
-            System.out.println("");
-        } else {
+            if (opc!=4) {
             menuSeguro();
         }
 
@@ -111,11 +118,12 @@ public class ServicioSeguros {
             tipo = leer.next();
         }
         p1 = altaPoliza();
-        return new Vehiculo(marca, modelo, anio, nroMotor, chasis, color, EnumVehiculos.valueOf(tipo), p1);
-        
+        return new Vehiculo(marca, modelo, anio, nroMotor, chasis, color, tipo, p1);
+
     }
-    
-    public Poliza altaPoliza (){
+
+    public Poliza altaPoliza() {
+        float montoGranizo = 0;
         System.out.println("Complete los datos de la poliza");
         System.out.println("Ingrese nuemero de poliza");
         int nroPoliza = leer.nextInt();
@@ -123,21 +131,47 @@ public class ServicioSeguros {
         int anio = leer.nextInt();
         int mes = leer.nextInt();
         int dia = leer.nextInt();
-        Date d1 = new Date (anio, mes-1, dia);
+        Date d1 = new Date(anio, mes - 1, dia);
         System.out.println("Ingrese la fecha de finalizacion");
         int anio2 = leer.nextInt();
         int mes2 = leer.nextInt();
         int dia2 = leer.nextInt();
-        Date d2 = new Date (anio2, mes2-1, dia2);
+        Date d2 = new Date(anio2, mes2 - 1, dia2);
+        System.out.println("Ingrese forma de pagos");
+        String formaPago = leer.next();
+        System.out.println("Ingrese monto asegurado");
+        float montoAsegurado = leer.nextFloat();
+        System.out.println("Ingrese si incluye granizo. S o N");
+        String granizo = leer.next();
+        if (granizo.equalsIgnoreCase("s")) {
+            System.out.println("Ingrese el monto asegurado por granizo");
+            montoGranizo = leer.nextFloat();
+        }
+        System.out.println("ingrese el tipo de cobertura. 1.Total o 2.contra tercerceros");
+        String tipoCobertura = leer.next();
+        while (!tipoCobertura.equalsIgnoreCase("1") && !tipoCobertura.equalsIgnoreCase("2")) {
+            System.out.println("ingrese 1 o 2");
+            tipoCobertura = leer.next();
+        }
+        cuo1 = altaCuotas();
+
+        return new Poliza(nroPoliza, d1, d2, cuo1, formaPago, montoAsegurado, granizo, montoGranizo, tipoCobertura);
     }
-    
-    /*
-    
-    private Cuotas infoCuotas;
-    private String formaPago;
-    private float montoAsegurado;
-    private String granizo;
-    private float montoGranizo;
-    private String tipoCobertura;
-    */
+
+    public Cuotas altaCuotas() {
+        System.out.println("");
+        System.out.println("Ingrese numero de cuotas");
+        int nroCuotas = leer.nextInt();
+        System.out.println("Ingrese el valor de la cuota");
+        float montoCuota = leer.nextFloat();
+        System.out.println("Año, mes y dia de vencimiento");
+        int anio = leer.nextInt();
+        int mes = leer.nextInt();
+        int dia = leer.nextInt();
+        Date d1 = new Date(anio, mes - 1, dia);
+        System.out.println("Forma de pago?");
+        String formaPago = leer.next();
+        return new Cuotas(nroCuotas, montoCuota, formaPago, d1, formaPago);
+
+    }
 }

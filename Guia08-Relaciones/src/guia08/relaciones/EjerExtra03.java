@@ -37,6 +37,7 @@ public class EjerExtra03 {
      */
     public static void main(String[] args) {
         ServicioSeguros sc = new ServicioSeguros();
+        sc.menuSeguro();
     }
     
 }
