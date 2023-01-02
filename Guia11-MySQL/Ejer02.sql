@@ -212,6 +212,12 @@ where p.codigo_fabricante is null;
 25. Devuelve todos los productos del fabricante Lenovo. (Sin utilizar INNER JOIN).
 */
 
+select *
+from producto
+where codigo_fabricante = (select codigo
+					       from fabricante
+						   where nombre = 'lenovo');
+
 select p.nombre, f.nombre
 from producto p, fabricante f
 where p.codigo_fabricante = f.codigo and f.nombre = 'lenovo';
@@ -220,6 +226,15 @@ where p.codigo_fabricante = f.codigo and f.nombre = 'lenovo';
 26. Devuelve todos los datos de los productos que tienen el mismo precio que el producto
 más caro del fabricante Lenovo. (Sin utilizar INNER JOIN).
 */
+
+select *
+from producto
+where precio = (select precio
+			    from producto
+				where codigo_fabricante = (select codigo
+										   from fabricante
+										  where nombre = 'lenovo')
+				order by precio desc limit 1);
 
 select *
 from producto p, fabricante f
@@ -231,6 +246,14 @@ where p.codigo_fabricante = f.codigo and p.precio < (select p.precio
 /*
 27. Lista el nombre del producto más caro del fabricante Lenovo.
 */
+
+select nombre
+from producto
+where codigo_fabricante = (select codigo
+						   from fabricante
+						   where nombre = 'lenovo')
+order by precio desc limit 1;
+
 
 select p.nombre, p.precio, f.nombre
 from fabricante f, producto p
@@ -270,3 +293,39 @@ where codigo_fabricante =
 (select codigo
 from fabricante 
 where nombre = 'asus'));
+
+/*
+29. Devuelve los nombres de los fabricantes que tienen productos asociados. (Utilizando IN o
+NOT IN).
+*/
+
+select codigo, nombre
+from fabricante
+where codigo in (select codigo_fabricante
+				 from producto);
+
+select distinct f.codigo, f.nombre
+from fabricante f, producto p
+where f.codigo in (p.codigo_fabricante);
+
+/*
+30. Devuelve los nombres de los fabricantes que no tienen productos asociados. (Utilizando
+IN o NOT IN).
+*/
+
+select nombre
+from fabricante
+where codigo not in (select codigo_fabricante
+				 from producto);
+                 
+/*
+31. Devuelve un listado con todos los nombres de los fabricantes que tienen el mismo número
+de productos que el fabricante Lenovo.
+*/
+
+select f.nombre, count(*) as 'cantidad de prod'
+from producto p inner join fabricante f on (p.codigo_fabricante = f.codigo)
+group by f.nombre
+having count(*) =  (select count(*)
+				  from producto p inner join fabricante f on (p.codigo_fabricante = f.codigo)
+				  where f.nombre = 'lenovo');
