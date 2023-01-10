@@ -53,7 +53,7 @@ public class LibroJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = libro.getIsbn();
+                int id = libro.getIsbn();
                 if (findLibro(id) == null) {
                     throw new NonexistentEntityException("The libro with id " + id + " no longer exists.");
                 }
@@ -66,7 +66,7 @@ public class LibroJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(int id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -111,7 +111,7 @@ public class LibroJpaController implements Serializable {
         }
     }
 
-    public Libro findLibro(Long id) {
+    public Libro findLibro(int id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Libro.class, id);

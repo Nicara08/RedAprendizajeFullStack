@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class Libro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long isbn;
+    private int isbn;
     @Basic
     private String titulo;
     private Integer anio;
@@ -29,7 +29,7 @@ public class Libro implements Serializable {
     public Libro() {
     }
 
-    public Libro(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, boolean alta, Autor autor, Editorial editorial) {
+    public Libro(int isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, boolean alta, Autor autor, Editorial editorial) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.anio = anio;
@@ -41,11 +41,11 @@ public class Libro implements Serializable {
         this.editorial = editorial;
     }
 
-    public Long getIsbn() {
+    public int getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 
