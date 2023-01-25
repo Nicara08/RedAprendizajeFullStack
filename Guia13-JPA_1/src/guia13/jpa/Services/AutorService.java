@@ -62,5 +62,12 @@ public class AutorService {
             System.out.println("El autor no se encontro");
         }
     }
+
+    public void altaAutor2(String nombre) {
+        Autor autor = new Autor();
+        autor.setNombre(nombre);
+        autorControladora.altaAutor(autor);
+        
+    }
     
 }

@@ -1,0 +1,20 @@
+Algoritmo sin_titulo
+	Definir num, centena, decena, unidad Como real;
+	
+	Escribir "Ingrese un numero de 3 cifras";
+	Leer num;
+	
+	Si num <= 999 Entonces
+		Si num >= 99 Entonces
+			centena = trunc (num / 100);
+			decena = trunc (num / 10) mod 10;
+			unidad = num mod 10;
+			Escribir "centena " centena, " " , "decena " decena, " ", "unidad " unidad;
+		SiNo
+			Escribir "El numero no es valido";
+		FinSi
+	SiNo
+		Escribir "El numero no es valido";
+	FinSi
+	
+FinAlgoritmo

@@ -1,6 +1,7 @@
 
 package guia13.jpa;
 
+import guia13.jpa.IGU.Principal;
 import guia13.jpa.Services.MenuService;
 
 public class Guia13JPA {
@@ -10,7 +11,10 @@ public class Guia13JPA {
      */
     public static void main(String[] args) throws Exception {
         MenuService ms = new MenuService();
-        ms.menu();
+        //ms.menu();
+        Principal principal = new Principal();
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
     }
     
 }
