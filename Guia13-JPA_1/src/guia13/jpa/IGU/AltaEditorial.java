@@ -2,6 +2,8 @@
 package guia13.jpa.IGU;
 
 import guia13.jpa.Services.EditorialService;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 public class AltaEditorial extends javax.swing.JFrame {
     EditorialService es = new EditorialService();
@@ -92,8 +94,8 @@ public class AltaEditorial extends javax.swing.JFrame {
     private void btnAutorGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorGuardarActionPerformed
         // se puede crear una variable y pasarle la variable nombre
         //String nombre = txtNombreAutor.getText() o directamente le pasamos txt;
-        as.altaAutor2(txtNombreAutor.getText());
-
+        es.altaAutor2(txtNombreAutor.getText());
+     
         JOptionPane optionPane = new JOptionPane("Se ha cargado correctamente");
         optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = optionPane.createDialog("Guardado exitoso");
