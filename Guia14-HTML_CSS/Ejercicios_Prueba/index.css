@@ -1,0 +1,92 @@
+h1{ 
+    text-decoration: underline; 
+    text-align: center;
+}
+
+h2{ 
+    font-family: Arial, Helvetica, sans-serif; 
+    color: brown; background-color: black;
+}
+
+body{ 
+    color: black; 
+    background-color: #cccccc; 
+    text-indent: 1cm;
+}
+
+/*
+SELECTOR UNIVERSAL, utilizamos el *
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+*/
+
+/*
+SELECTOR DE ETIQUETA, colocamos que etiqueta vamos a intervenir
+*/
+
+p{
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table, div {
+    text-align: center;
+    border: 2px solid red;
+}
+
+/*
+SELECTOR DESCENDENTE, seleccionamos un elemento dentro de otro elemento
+*/
+
+p span{
+    color: red;
+    font-weight: bold;
+}
+
+/*
+SELECTOR DE CLASE, le damos estilos dependiendo de la clase, se coloca punto y el nombre de la clase
+*/
+
+.texto {
+    font-size: 20px;
+}
+
+/*
+SELECTOR DE ID, le damos estilos dependiendo del ID, se coloca numeral # y el nombre del ID, es unico
+*/
+
+#nombre {
+    background-color: aqua;
+}
+
+/*
+PSEUDO CLASES
+
+• :link, aplica estilos a los enlaces que apuntan a páginas o recursos que aún no han sido
+visitados por el usuario.
+• :visited, aplica estilos a los enlaces que apuntan a recursos que han sido visitados
+anteriormente por el usuario. El historial de enlaces visitados se borra automáticamente
+cada cierto tiempo y el usuario también puede borrarlo manualmente.
+• :hover, aplica estilos al enlace sobre el que el usuario ha posicionado el puntero del ratón.
+• :active, aplica estilos al enlace que está clickeado el usuario.
+*/
+
+a:link{
+    color: red;
+}
+
+a.visited{
+    color: green;
+}
+
+a.hover{
+    color: aqua;
+}
+
+a.active{
+    color: blue;
+}
